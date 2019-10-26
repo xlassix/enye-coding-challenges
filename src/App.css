@@ -1,0 +1,32 @@
+@import  '~antd/dist/antd.css';
+
+.Navbrand{
+    color:white;
+    text-align: center;
+    padding: 16px;
+    display: flex;
+}
+.right{
+    margin-right: 20px;
+}
+.form{
+    float: none;
+    margin: 20px auto;
+}
+
+.row-content{
+    margin: 0px auto;
+    padding:50px;
+    display: flex;
+    justify-content: center;
+    border:  1px rigde;
+    min-height:  400px;
+}
+
+.header-text{
+    display: inline-block;
+    text-align: center;
+    justify-self: center;
+    align-content: center;
+    color: aliceblue;
+}
