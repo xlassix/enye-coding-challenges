@@ -31,18 +31,18 @@ const Navbar=(props)=> {
           </Row>
         </Header>
             <Drawer title="Coding Challenge 1!" placement="right" closable={false}
-                        onClose={toggle_visible}
-                        visible={state.visible}
-                        theme={"Dark"}>
-                        <Menu mode="vertical">
-                            <Menu.Item key="form">
-                              <Link to="/">Form</Link>
-                            </Menu.Item>
-                            <Menu.Item key="table">
-                              <Link to="/table">User Table</Link>
-                            </Menu.Item>
-                        </Menu>
-                    </Drawer>
+                  onClose={toggle_visible}
+                  visible={state.visible}
+                  theme={"Dark"}>
+                  <Menu mode="vertical">
+                      <Menu.Item key="form">
+                        <Link to="/">Form</Link>
+                      </Menu.Item>
+                      <Menu.Item key="table">
+                        <Link to="/table">User Table</Link>
+                      </Menu.Item>
+                  </Menu>
+              </Drawer>
         </Layout>
     );
   }

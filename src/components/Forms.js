@@ -1,6 +1,7 @@
 import React,{useState} from "react"
 import { Form, Row,Col, Icon, Input, Button ,DatePicker,message} from 'antd';
 import {useDispatch} from "react-redux"
+import Adduser from "../actions/Add_user"
 
 
 const Forms =(props)=>{
@@ -22,16 +23,17 @@ const Forms =(props)=>{
         //set state depending on the name of field being edited with event.target
         setState({ ...state,
             [event.target.name]:event.target.value
-        })
+     f   })
     }
 
     // create a function to handle submit event
     const handleOnSubmit=(event)=>{
         //dispatcher used directly to for action since the application dispatch only on action(NOTE: NOT ideal)
+        Adduser(state)
         dispatch({type:"ADD_USER",user:state})
         //deactivate the default action of a submit button(post,get, etc) to refresh page
         event.preventDefault();
-        message.loading('Saving to database..', 0.25).then(() => message.success('Finished saving', 0.75))      
+        message.loading('Saving to database..', 0.25).then(() => message.success('Saved to Database', 0.75))      
         //clear fields
         setState({
             first_name:"",
@@ -58,21 +60,17 @@ const Forms =(props)=>{
     }
         return(
             //row used to structure and provide a responsive build for different screen sizes
-            <Row md={18} xl={12}>
+            <Row md={18} xl={16} xll={12}>
                 <Col>
                         <Form onSubmit={handleOnSubmit} >
                             <Form.Item> 
-                                <Row gutter={12}>
-                                    <Input  type="text" onChange={handleOnChange} value={state.first_name} name="first_name" required={true} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}placeholder="First Name"/>
-                                </Row>
+                                <Input  type="text" onChange={handleOnChange} value={state.first_name} name="first_name" required={true} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}placeholder="First Name"/>
                             </Form.Item>
                             <Form.Item>
-                                <Row gutter={12}>
-                                    <Input type="text" onChange={handleOnChange} value={state.last_name} name="last_name" required prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}placeholder="Last Name"/>
-                                </Row>
+                                <Input type="text" onChange={handleOnChange} value={state.last_name} name="last_name" required prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}placeholder="Last Name"/>
                             </Form.Item>
                             <Form.Item >
-                                <Row gutter={12}>
+                                <Row gutter={4}>
                                     <Col span={10}>
                                         <label  htmlFor="birthday" > Date of Birth:</label>
                                     </Col>
@@ -82,7 +80,7 @@ const Forms =(props)=>{
                                 </Row>
                             </Form.Item>
                             <Form.Item >
-                                <Row gutter={12}>
+                                <Row gutter={4}>
                                     <Col span={10}>
                                         <label htmlFor="age" > Age:</label>
                                     </Col>
@@ -92,7 +90,7 @@ const Forms =(props)=>{
                                 </Row>
                             </Form.Item>
                             <Form.Item>
-                                <Row gutter={12}>
+                                <Row gutter={4}>
                                     <Col span={10}>
                                         <label  htmlFor="Hobby" > Hobby:</label>
                                     </Col>
