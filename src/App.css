@@ -16,11 +16,12 @@
 
 .row-content{
     margin: 0px auto;
-    padding:50px;
+    padding:30px;
     display: flex;
     justify-content: center;
     border:  1px rigde;
     min-height:  400px;
+    min-width: 500px;
 }
 
 .header-text{

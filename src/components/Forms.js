@@ -1,7 +1,6 @@
 import React,{useState} from "react"
 import { Form, Row,Col, Icon, Input, Button ,DatePicker,message} from 'antd';
 import {useDispatch} from "react-redux"
-import Adduser from "../actions/Add_user"
 
 
 const Forms =(props)=>{
@@ -23,13 +22,12 @@ const Forms =(props)=>{
         //set state depending on the name of field being edited with event.target
         setState({ ...state,
             [event.target.name]:event.target.value
-     f   })
+        })
     }
 
     // create a function to handle submit event
     const handleOnSubmit=(event)=>{
         //dispatcher used directly to for action since the application dispatch only on action(NOTE: NOT ideal)
-        Adduser(state)
         dispatch({type:"ADD_USER",user:state})
         //deactivate the default action of a submit button(post,get, etc) to refresh page
         event.preventDefault();
@@ -60,7 +58,7 @@ const Forms =(props)=>{
     }
         return(
             //row used to structure and provide a responsive build for different screen sizes
-            <Row md={18} xl={16} xll={12}>
+            <Row md={18} xl={16}>
                 <Col>
                         <Form onSubmit={handleOnSubmit} >
                             <Form.Item> 
@@ -70,32 +68,32 @@ const Forms =(props)=>{
                                 <Input type="text" onChange={handleOnChange} value={state.last_name} name="last_name" required prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}placeholder="Last Name"/>
                             </Form.Item>
                             <Form.Item >
-                                <Row gutter={4}>
-                                    <Col span={10}>
+                                <Row gutter={2}>
+                                    <Col span={8}>
                                         <label  htmlFor="birthday" > Date of Birth:</label>
                                     </Col>
-                                    <Col span={10}>
+                                    <Col span={14}>
                                         <DatePicker id="birthday" span={24}  required onChange={view} value={birthday}/>
                                     </Col>
                                 </Row>
                             </Form.Item>
                             <Form.Item >
-                                <Row gutter={4}>
-                                    <Col span={10}>
+                                <Row gutter={2}>
+                                    <Col span={8}>
                                         <label htmlFor="age" > Age:</label>
                                     </Col>
-                                    <Col span={10}>
+                                    <Col span={14}>
                                         <Input type="text" required id="age" value={state.age} placeholder="Age" prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }}/>}></Input>
                                     </Col>
                                 </Row>
                             </Form.Item>
                             <Form.Item>
-                                <Row gutter={4}>
-                                    <Col span={10}>
+                                <Row gutter={2}>
+                                    <Col span={8}>
                                         <label  htmlFor="Hobby" > Hobby:</label>
                                     </Col>
-                                    <Col span={10}>
-                                        <Input  type="TextArea" onChange={handleOnChange} value={state.Hobby} name="Hobby"  size="large" prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}placeholder="Hobby" required/>
+                                    <Col span={14}>
+                                        <Input   onChange={handleOnChange} value={state.Hobby} name="Hobby"  prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}placeholder="Hobby" required/>
                                     </Col>
                                 </Row >
                             </Form.Item>

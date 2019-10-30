@@ -6,6 +6,10 @@ import {useSelector} from 'react-redux'
 // columns represent table header and possible features
 const columns = [
     {
+    title: 'User ID',
+    dataIndex: 'userId',
+    },
+    {
     title: 'First Name',
     dataIndex: 'first_name',
     sorter: (a, b) => a.first_name.length - b.first_name.length,
@@ -44,7 +48,7 @@ const rowSelection = {
 function MyTable(){
   //using selector to get all user from redux store
   const users=useSelector((state)=>state.users)
- return(<Table rowSelection={rowSelection} columns={columns} dataSource={users}  />)
+ return(<Table rowSelection={rowSelection} columns={columns} dataSource={users} key='userId'  />)
 }
 
 export default MyTable;
