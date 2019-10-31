@@ -4,7 +4,6 @@ import { eventChannel } from "redux-saga";
 import {message} from 'antd'
 import full_users from "../actions/full_users"
 
-
 function* update(){
     // create the event listener 
     const listener = eventChannel(
@@ -26,7 +25,7 @@ function* update(){
 function*  addToFirebase(action){
     const user=action.user;
     yield fetch('https://us-central1-reactxlassix.cloudfunctions.net/addUser' ,{
-                user:user,header:{
+                body:JSON.stringify(user),header:{
                 "Content-Type":"application/json; charset=utf-8"
             },
         }).then(res=>res.json())
