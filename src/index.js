@@ -6,12 +6,14 @@ import {createStore,applyMiddleware} from "redux";
 import rootReducer from "./reducers/main"
 import createSagaMiddleware from "redux-saga"
 import allSagas from "./midware/listen"
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 //init state  when store is first initialized
 const initState ={
     users:[]
 }
 const mid=createSagaMiddleware()
-const mystore= createStore(rootReducer,initState,applyMiddleware(mid),window.devToolsExtension && window.devToolsExtension());
+const mystore= createStore(rootReducer,initState,
+    composeWithDevTools(applyMiddleware(mid)));
 
 mid.run(allSagas)
 
