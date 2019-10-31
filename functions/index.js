@@ -1,37 +1,39 @@
+// import the reqiuired libraries
 const functions = require('firebase-functions');
-const uuid = require("uuid/v5");
-// The Firebase Admin SDK to access the Firebase Realtime Database.
-const admin = require('firebase-admin');
-const cors =require("cors")({option:true});
-admin.initializeApp(
-    {credential: admin.credential.applicationDefault(),
-    databaseURL: "https://reactxlassix.firebaseio.com",
-    apiKey: "AIzaSyCdzYbZbn7Qb_-__62gb5ntmR3ivd7P3hE",
-    authDomain: "reactxlassix.firebaseapp.com",
-    databaseURL: "https://reactxlassix.firebaseio.com",
-    projectId: "reactxlassix",
-    storageBucket: "reactxlassix.appspot.com",
-    messagingSenderId: "90088175354",
-    appId: "1:90088175354:web:c0f2c89c730f7abcc8fb43",
-    measurementId: "G-8HRQEEKVV9"});
+const express=require("express");
+const cors= require("cors")({options:true,credentials:true});
+const admin = require("firebase-admin");
+const uuid = require("uuid/v5"); //uuid for generating random id's for clients
 
+// initialize the database
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  apiKey: "AIzaSyCdzYbZbn7Qb_-__62gb5ntmR3ivd7P3hE",
+  authDomain: "reactxlassix.firebaseapp.com",
+  databaseURL: "https://reactxlassix.firebaseio.com",
+  projectId: "reactxlassix",
+  storageBucket: "reactxlassix.appspot.com",
+  messagingSenderId: "90088175354",
+  appId: "1:90088175354:web:c0f2c89c730f7abcc8fb43",
+  measurementId: "G-8HRQEEKVV9"
+});
+const app = express()
+app.use(cors); //use cors for resource sharing
+app.use(express.urlencoded({extended:false})); //enable url-encoded types too
+app.use(express.json()); //enable us recieve json types in the request's body
+app.options('*', cors);
 
     // this function cleans up the distorted json recieved
-function JSONize(str) {
-    return str
-      // wrap keys without quote with valid double quote
-      .replace(/([\$\w]+)\s*:/g, function(_, $1){return '"'+$1+'":'})    
-      // replacing single quote wrapped ones to double quote 
-      .replace(/'([^']+)'/g, function(_, $1){return '"'+$1+'"'})         
-  }
-  
-  exports.addUser = functions.https.onRequest(async (req, res) => {
-    // Grab the text parameter.
+    function JSONize(str) {
+      return str.replace(/([\$\w]+)\s*:/g, function(_, $1){return '"'+$1+'":'}).replace(/'([^']+)'/g, function(_, $1){return '"'+$1+'"'})         
+    }
+  app.post('/', async (req,res)=>{
     res.set('Access-Control-Allow-Origin', '*');
+    // Grab the text parameter.
     //jsonize for distorted data
     const original = JSON.parse(req.body);
     // Push the new message into the Realtime Database using the Firebase Admin SDK.
-    const snap= await admin.database().ref('/user_db').push({...original})
+    await admin.database().ref('/user_db').push({...original})
     return res.status(200).send(original)
   });
     // add an evenlistener function to add an id to our user
@@ -44,10 +46,9 @@ exports.addId = functions.database.ref('/user_db/{dataId}/')
       return snapshot.ref.child('userId').set(uniqueId);
     });
   
-  exports.getData= functions.https.onRequest( async (req, res) => {
-        res.set('Access-Control-Allow-Origin', '*');
+    app.get('/',(req,res)=>{
+      res.set('Access-Control-Allow-Origin', '*');
         return admin.database().ref("/user_db").on("value",snapshot=>{
-            console.log(snapshot.val());
             return res.status(200).send(snapshot.val());
         },errors=>{
             console.log(errors);
@@ -55,4 +56,5 @@ exports.addId = functions.database.ref('/user_db/{dataId}/')
         });
     });
   
+    exports.addUser = functions.https.onRequest(app);
   
