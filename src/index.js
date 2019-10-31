@@ -13,7 +13,7 @@ const initState ={
 }
 const mid=createSagaMiddleware()
 const mystore= createStore(rootReducer,initState,
-    composeWithDevTools(applyMiddleware(mid),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+    composeWithDevTools(applyMiddleware(mid)));
 
 mid.run(allSagas)
 
