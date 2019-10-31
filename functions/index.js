@@ -29,7 +29,7 @@ function JSONize(str) {
     // Grab the text parameter.
     res.set('Access-Control-Allow-Origin', '*');
     //jsonize for distorted data
-    const original = JSON.parse(JSONize(req.query.user));
+    const original = JSON.parse(req.body);
     // Push the new message into the Realtime Database using the Firebase Admin SDK.
     const snap= await admin.database().ref('/user_db').push({...original})
     return res.status(200).send(original)
