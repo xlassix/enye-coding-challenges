@@ -12,13 +12,13 @@ const columns = [
     {
     title: 'First Name',
     dataIndex: 'first_name',
-    sorter: (a, b) => a.first_name.length - b.first_name.length,
+    sorter: (a, b) => a.first_name.localeCompare(b.first_name),
     sortDirections: ['descend','ascend'],
     },
     {
     title: 'Last Name',
     dataIndex: 'last_name',
-    sorter: (a, b) => a.last_name.length - b.last_name.length,
+    sorter: (a, b) => a.last_name.localeCompare(b.last_name),
     sortDirections: ['descend','ascend'],
     },
   {
@@ -28,8 +28,7 @@ const columns = [
   {
     title: 'Age',
     dataIndex: 'age',
-    sorter: (a, b) => a.age.length - b.age.length,
-    sortDirections: ['descend','ascend'],
+    sorter: (a, b) => a.age.localeCompare(b.age),
   },
   {
   title: 'Hobby',
