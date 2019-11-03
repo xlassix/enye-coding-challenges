@@ -30,7 +30,7 @@ const Forms =(props)=>{
 
     // create a function to handle submit event
     const handleOnSubmit=(event)=>{
-        //dispatcher used directly to for action since the application dispatch only on action(NOTE: NOT ideal)
+        //dispatch used directly for action since the form dispatches only one action(NOTE: NOT ideal)
         dispatch({type:"ADD_USER",user:state})
         //deactivate the default action of a submit button(post,get, etc) to refresh page
         event.preventDefault();
