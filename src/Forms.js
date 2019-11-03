@@ -3,6 +3,9 @@ import { Form, Row,Col, Icon, Input, Button ,DatePicker,message} from 'antd';
 import {useDispatch} from "react-redux"
 
 
+// a controlled form, function based component using only react hooks
+// not ideal for authenication form 
+// ideally react-redux-form would be best
 const Forms =(props)=>{
     //initialise dispatcher
     const dispatch=useDispatch();
