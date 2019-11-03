@@ -11,6 +11,7 @@ import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 const initState ={
     users:[]
 }
+
 const mid=createSagaMiddleware()
 const mystore= createStore(rootReducer,initState,
     composeWithDevTools(applyMiddleware(mid)));
