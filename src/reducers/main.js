@@ -1,11 +1,8 @@
 //main reducer
 const rootReducer=(state, action) =>{
-    //if (action.type === "ADD_USER"){
-    //et newuser=action.user
-    //generate random key for user
-    //return({users:[...state.users,newuser]})
     switch(action.type){
         case 'full_users':
+            //this is excuted once the redux saga yields the actions
             console.log(action)
             return({users:[...action.user]})
             break;
